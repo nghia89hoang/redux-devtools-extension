@@ -159,7 +159,8 @@ const devToolsExtension = function(reducer, preloadedState, config) {
       store = stores[instanceId] =
         configureStore(next, monitor.reducer, config)(reducer_, initialState_, enhancer_);
 
-      setTimeout(init, 3000);
+      setTimeout(init, window.self === window.top ? 0 : 3000); // delay initialization for iframes
+
       return store;
     };
   };
